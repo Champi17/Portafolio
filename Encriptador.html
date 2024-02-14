@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Encriptacion y Desencriptacion</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #c1e3ff;
+            font-family: Arial, sans-serif;
+        }
+        #container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            width: 50%;
+        }
+        #inputText {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            height: 100px;
+            resize: none;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: #fff;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Encriptación y Desencriptación</h1>
+        <textarea id="inputText" placeholder="Introduce tu texto aqui"></textarea>
+        <br>
+        <button onclick="encrypt()">Encriptar</button>
+        <button onclick="decrypt()">Desencriptar</button>
+        <button onclick="copyToClipboard()">Copiar</button>
+        <p id="output"></p>
+    </div>
+    
+   
+
+    <script>
+        const keys = {
+            "e": "enter",
+            "i": "imes",
+            "a": "ai",
+            "o": "ober",
+            "u": "ufat"
+        };
+
+        function encrypt() {
+            let inputText = document.getElementById('inputText').value;
+            let outputText = "";
+            for (let char of inputText) {
+                outputText += keys[char] || char;
+            }
+            document.getElementById('output').innerText = outputText;
+        }
+
+        function decrypt() {
+            let inputText = document.getElementById('inputText').value;
+            let outputText = inputText;
+            for (let key in keys) {
+                let re = new RegExp(keys[key], "g");
+                outputText = outputText.replace(re, key);
+            }
+            document.getElementById('output').innerText = outputText;
+        }
+
+        function copyToClipboard() {
+            let outputText = document.getElementById('output');
+            navigator.clipboard.writeText(outputText.innerText);
+        }
+    </script>
+</body>
+</html>
